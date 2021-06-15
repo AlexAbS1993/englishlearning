@@ -1,6 +1,7 @@
 import {isGuest} from './isGuest'
 import {createGuest} from './createGuest'
 import {isNewGuest} from './isNewGuest'
+import {copyStatisticFromGuest} from './copyStatisticFromGuest'
 
 describe("Guests functions testing", () => {
     describe("isGuest test-suit", () => {
@@ -51,6 +52,24 @@ describe("Guests functions testing", () => {
             let localStorageToken = !Boolean(localStorage.getItem("guestlearning"))
             expect(isNewGuest()).toEqual(localStorageToken)
         })
+    })
+    describe("copyStatisticFromGuest test-suite", () => {
+        beforeEach(() => {
+            localStorage.setItem("guestlearning", "999666")
+            localStorage.setItem("gueststatistic", JSON.stringify({
+                points: 10
+            }))
+
+        })
+        afterEach(() => {
+            localStorage.removeItem("guestlearning")
+            localStorage.removeItem("gueststatistic")
+
+        })
+        test("it returnes undefined", () => {
+            
+        })
+        
     })
 })
 
