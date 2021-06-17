@@ -6,4 +6,7 @@ const reducers = combineReducers({
     modal: modalReducer
 })
 
-export const store = createStore(reducers, applyMiddleware(thunk))
+export const store = createStore(reducers, applyMiddleware(thunk));
+(window as any).store = store
+
+ 

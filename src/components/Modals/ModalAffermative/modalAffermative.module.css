@@ -1,0 +1,5 @@
+.modalAffermative {
+    width: calc(200px + 10vmax);
+    height: calc(200px + 10vmax);
+    padding: 10px;
+}

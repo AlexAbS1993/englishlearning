@@ -1,0 +1,14 @@
+.modal_affremative {
+    width: 50px;
+    height: 30px;
+    padding: 2px 5px;
+    margin: 2px 5px;
+}
+
+.modal_affremative_accept{
+    background-color: green;
+}
+
+.modal_affremative_decline {
+    background-color: rgb(141, 22, 22);
+}
