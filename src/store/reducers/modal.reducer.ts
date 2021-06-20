@@ -4,7 +4,6 @@ import {
     ModalReducerActionType, 
     InitialStateAffrimitiveType, 
     InitialStateLoginRegistrationInputs, 
-    InitialStateLoginRegistrationLabels, 
     ModalReducerSetMarkUpDataType,
     InitialStateLoginRegistration
 } from './Types/modal.reducer.types';
@@ -17,7 +16,6 @@ export const modalInitialState = {
         cb: () => {}
     } as InitialStateAffrimitiveType,
     login_registraton: {
-        labels: [] as InitialStateLoginRegistrationLabels[],
         inputs: [] as InitialStateLoginRegistrationInputs[],
         cb: () => {},
     } as InitialStateLoginRegistration
@@ -25,7 +23,7 @@ export const modalInitialState = {
 
 const prefix = "MODAL_REDUCER:"
 
-export const actionCreators = {
+export const modalActionCreators = {
     setType: (modalType: ModalComponentTypeType) => {
         return {type: `${prefix}SET_MODAL_TYPE`, modalType} as const
     },
@@ -65,11 +63,10 @@ export const modalReducer = (state: ModalReducerInitialStateType = modalInitialS
                 }
             }
             if (action.data.modalType === "login" || action.data.modalType === "registration"){
-                const {labels, inputs, cb} = action.data
+                const {inputs, cb} = action.data
                 return {
                     ...state,
                     login_registraton: {
-                        labels,
                         inputs,
                         cb
                     }

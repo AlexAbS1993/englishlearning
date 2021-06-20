@@ -1,8 +1,27 @@
-.modal_affremative {
-    width: 50px;
+.simple {
+    background-color: rgb(70, 46, 58);
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 12px 15px;
+    margin: 2px 5px;
+    width: 70px;
+    height: 50px;
+    color: rgb(255, 255, 255);
+}
+
+.simple_small {
+    padding: 2px 5px;
+    width: 60px;
     height: 30px;
+}
+
+.modal_affremative {
+    width: 80px;
+    height: 40px;
     padding: 2px 5px;
     margin: 2px 5px;
+    cursor: pointer;
 }
 
 .modal_affremative_accept{
@@ -10,5 +29,22 @@
 }
 
 .modal_affremative_decline {
+    background-color: rgb(141, 22, 22);
+}
+
+.modal_registration{
+    width: 100px;
+    height: 40px;
+    padding: 2px 5px;
+    margin: 2px 5px;
+    cursor: pointer;
+    color: white;
+}
+
+.modal_registration_accept {
+    background-color: rgb(24, 54, 119);
+}
+
+.modal_registration_decline {
     background-color: rgb(141, 22, 22);
 }

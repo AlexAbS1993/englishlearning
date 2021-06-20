@@ -1,6 +1,6 @@
 import { modalReducer } from './reducers/modal.reducer';
-import { applyMiddleware, combineReducers, createStore } from "redux"
 import thunk from 'redux-thunk';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 
 const reducers = combineReducers({
     modal: modalReducer

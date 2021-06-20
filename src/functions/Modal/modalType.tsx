@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { ModalAffermative } from "../../components/Modals/ModalAffermative/ModalAffermative";
-import { ModalLogin } from "../../components/Modals/ModalLogin";
-import { ModalRegistration } from "../../components/Modals/ModalRegistration";
+
+import { ModuleRegistration } from "../../components/Modals/ModalRegistration/ModalRegistration";
 import { ModalComponentTypeType } from "../../components/Modals/Types/modal.component.types";
 
 export function modalType(type:ModalComponentTypeType):ReturnType<FC>{
@@ -10,10 +10,10 @@ export function modalType(type:ModalComponentTypeType):ReturnType<FC>{
             return <ModalAffermative />
         }
         case "login": {
-            return <ModalLogin />
+            return <div></div>
         }
         case "registration": {
-            return <ModalRegistration />
+            return <ModuleRegistration />
         }
         default: return (
             <> 
