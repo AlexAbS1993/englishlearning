@@ -1,0 +1,9 @@
+.registrationWrapper {
+    width: calc(250px + 5vmax);
+    min-height: 40%;
+}
+
+.modalRegistrationLoginButtonsWrapper {
+    display: flex;
+    justify-content: center;
+}

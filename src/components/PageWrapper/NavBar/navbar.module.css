@@ -1,0 +1,8 @@
+.navBarWrapper {
+    width: 100vw;
+    height: 10%;
+    background: linear-gradient(to bottom, blue, rgb(73, 73, 129));
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+}
+

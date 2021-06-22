@@ -5,9 +5,11 @@ import { FC } from 'react';
 import classes from './modal.module.css'
 import { modalType } from '../../functions/Modal/modalType';
 import {useTransition, animated} from 'react-spring'
+import { ModalInitialStatePageTypeType } from '../../store/reducers/Types/modal.reducer.types';
 
 export const Modal:FC = () => {
     const type = useSelector<RootState, ModalComponentTypeType>(state => state.modal.type)
+    const page = useSelector<RootState, ModalInitialStatePageTypeType>(state => state.modal.page)
     const isOpen = useSelector<RootState, boolean>(state => state.modal.isOpen)
     const transition = useTransition(isOpen, {
         from: {opacity: 0},
@@ -17,9 +19,9 @@ export const Modal:FC = () => {
     return (
         <>
             {
-                transition((style, item) => item ? <animated.div style={style} className={classes.modalWrapper} onClick={(e) => {e.preventDefault()}}> 
+                transition((style, item) => item ? <animated.div style={style} className={classes.modalWrapper} onClick={(e) => {e.stopPropagation()}}> 
                 {
-                    modalType(type)
+                    modalType(type, page)
                 }
             </animated.div>
             :

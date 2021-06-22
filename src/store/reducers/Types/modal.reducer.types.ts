@@ -4,6 +4,8 @@ import { ModalComponentTypeType } from '../../../components/Modals/Types/modal.c
 
 export type ModalReducerInitialStateType = typeof modalInitialState
 
+export type ModalInitialStatePageTypeType = "registration"| "login"
+
 type inferActionType<T> = T extends {[key: string]: infer Z} ? Z : never 
 export type ModalReducerActionType = ReturnType<inferActionType<typeof modalActionCreators>>
 
@@ -18,7 +20,8 @@ type LoginRegistrationInput = {
     type: string,
     id: string,
     name: string,
-    label: string
+    label: string,
+    labelImg?: string
 }
 export type InitialStateLoginRegistrationInputs = LoginRegistrationInput
 

@@ -1,5 +1,5 @@
 .simple {
-    background-color: rgb(70, 46, 58);
+    background-color: var(--firts_theme_color);
     border: none;
     cursor: pointer;
     outline: none;
@@ -25,26 +25,46 @@
 }
 
 .modal_affremative_accept{
-    background-color: green;
+    background-color: var(--accept_theme_color);
 }
 
 .modal_affremative_decline {
-    background-color: rgb(141, 22, 22);
+    background-color: var(--decline_theme_color);
 }
 
 .modal_registration{
-    width: 100px;
+    min-width: 100px;
     height: 40px;
-    padding: 2px 5px;
+    padding: 4px 15px;
     margin: 2px 5px;
     cursor: pointer;
-    color: white;
+    border: none;
+    transition: .2s all linear;
+}
+
+.modal_registration:hover {
+    transform: translateY(-3px);
 }
 
 .modal_registration_accept {
-    background-color: rgb(24, 54, 119);
+    background-color: var(--accept_theme_color);
 }
 
 .modal_registration_decline {
-    background-color: rgb(141, 22, 22);
+    background-color: var(--decline_theme_color);
+}
+
+.nav_bar_icon {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    padding: 0px;
+    border: none;
+    background-color: inherit;
+}
+
+.nav_bar_icon>img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
 }

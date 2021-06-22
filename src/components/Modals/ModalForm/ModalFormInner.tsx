@@ -1,14 +1,14 @@
 import { FC } from "react"
 import { ModalRegistrationInnerType } from "../Types/modal.component.types"
-import { ModalRegistrationInnerMapped } from "./ModalRegistrationInnerMapped"
+import { ModalFormMapped } from "./ModalFormMapped"
 
-export const ModalRegistrationInner:FC<ModalRegistrationInnerType> = ({inputs}) => {
-
+export const ModalFormInner:FC<ModalRegistrationInnerType> = ({inputs}) => {
     return (
         <>
             {
                 inputs.map((element) => {
-                    return <ModalRegistrationInnerMapped 
+                    return <ModalFormMapped 
+                    labelImg={element.labelImg}
                     key={element.id} 
                     id={element.id} 
                     label={element.label}

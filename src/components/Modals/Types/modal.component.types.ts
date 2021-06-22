@@ -3,6 +3,9 @@ import { InitialStateAffrimitiveType } from "../../../store/reducers/Types/modal
 
 export type ModalComponentTypeType = "affermative"|"registration"|"login"
 export type ModalAffermativeInnerType = InitialStateAffrimitiveType&{closeHandler:() => void}
+export type ModalRegistrationLoginType = {
+        page: "registration"|"login"
+}
 export type ModalRegistrationInnerType = {
     inputs: (InitialStateLoginRegistrationInputs&{onChange: (e:any) => void})[]
 }

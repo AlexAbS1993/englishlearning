@@ -5,12 +5,14 @@ import {
     InitialStateAffrimitiveType, 
     InitialStateLoginRegistrationInputs, 
     ModalReducerSetMarkUpDataType,
-    InitialStateLoginRegistration
+    InitialStateLoginRegistration,
+    ModalInitialStatePageTypeType
 } from './Types/modal.reducer.types';
 
 export const modalInitialState = {
     type: "" as ModalComponentTypeType,
     isOpen: false as boolean,
+    page: "" as  ModalInitialStatePageTypeType,
     affermative: {
         text: "",
         cb: () => {}
@@ -26,6 +28,9 @@ const prefix = "MODAL_REDUCER:"
 export const modalActionCreators = {
     setType: (modalType: ModalComponentTypeType) => {
         return {type: `${prefix}SET_MODAL_TYPE`, modalType} as const
+    },
+    setPage: (page: ModalInitialStatePageTypeType) => {
+        return {type: `${prefix}SET_MODAL_PAGE`, page} as const
     },
     setOpen: (toggle: boolean) => {
         return {type: `${prefix}SET_MODAL_OPEN`, toggle} as const
@@ -44,6 +49,12 @@ export const modalReducer = (state: ModalReducerInitialStateType = modalInitialS
             return {
                 ...state,
                 type: action.modalType
+            }
+        }
+        case "MODAL_REDUCER:SET_MODAL_PAGE": {
+            return {
+                ...state,
+                page: action.page
             }
         }
         case "MODAL_REDUCER:SET_MODAL_OPEN": {

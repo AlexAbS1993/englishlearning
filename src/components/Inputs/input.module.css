@@ -1,0 +1,71 @@
+.inputWrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr;
+    gap: 5px;
+    justify-items: center;
+    align-items: center;
+}
+
+.checkboxWrapper {
+    display: grid;
+    grid-template-columns: 5fr 2fr;
+    gap: 5px;
+    margin-bottom: 15px;
+    margin-top: 5px;
+}
+.checkboxWrapper>div:first-child{
+    display: grid;
+    justify-content: end;
+}
+.checkboxWrapper>div:last-child{
+    display: grid;
+}
+
+.inputWrapper>div {
+    height: 100%;
+    width: 80%;
+    text-align: center;
+}
+
+.inputInputWrapper {
+    position: relative;
+}
+.labelImgWrapper {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    width: 10%;
+    height: 60%;
+    z-index: 2;
+}
+.labelImgWrapper:hover{
+    background-color: rgb(131, 210, 235);
+}
+
+.labelImgWrapper>img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
+
+.inputInput {
+    height: 70%;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid black;
+    background-color: inherit;
+    padding-left: 40px;
+    position: relative;
+    font-size: 20px;
+}
+
+.inputInput:focus {
+    outline: none;
+}
+
+.inputLabel {
+    width: 100%;
+}

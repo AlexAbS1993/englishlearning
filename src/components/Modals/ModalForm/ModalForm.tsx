@@ -1,18 +1,19 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InitialStateLoginRegistrationInputs } from "../../../store/reducers/Types/modal.reducer.types";
 import { AppDispatch, RootState } from "../../../store/Types/store.types";
 import {modalActionCreators} from '../../../store/reducers/modal.reducer'
-import { ModalRegistrationInner } from "./ModalRegistrationInner";
+import { ModalFormInner } from "./ModalFormInner";
 import { inputInjectChange } from "../../../functions/Modal/registrationInputInjectChange";
 import Button from "../../Buttons/Button"
 import { Extentions, VariantsEnum } from "../../Buttons/Types/Button.component.types"
-import classes from './modalRegistration.module.css'
+import classes from './modalForm.module.css'
+import { ModalRegistrationLoginType } from "../Types/modal.component.types";
 
 const {clearModal} = modalActionCreators
 
 
-export const ModuleRegistration:FC = () => {
+export const ModalForm:FC<ModalRegistrationLoginType> = ({page}) => {
     const [initialize, setInitialize] = useState(false)
     const [tempValues, setChange] = useState({})
     const [isTempValuesDone, setTempValuesDone] = useState(false)
@@ -20,7 +21,12 @@ export const ModuleRegistration:FC = () => {
     useEffect(() => {
         let fields:any = {}
         for (let i = 0; i < inputs.length; i++){{
-            fields[inputs[i].name] = ""
+            if (inputs[i].type === "checkbox"){
+                fields[inputs[i].name] = false
+            }
+            else {
+                fields[inputs[i].name] = ""
+            } 
         }}
         setChange({...fields})
         setTempValuesDone(true)
@@ -35,25 +41,30 @@ export const ModuleRegistration:FC = () => {
     const closeHandler = () => {
         dispatch(clearModal())
     }
+    const definitiveInputs = useMemo(() => {
+        return inputInjectChange(inputs, setChange, tempValues)
+    }, [initialize])
     return ( <>
         {initialize ?  
             (
-                <div className={classes.registrationWrapper}>
-            <ModalRegistrationInner 
-            inputs={inputInjectChange(inputs, setChange, tempValues)}
-            />
-            <Button 
-            text="Регистрация"
-            variant={VariantsEnum.modal_registration_accept}
-            extention={Extentions.modal_registration}
-            cb={cb.bind(null, tempValues)}
-            />
-            <Button 
-            text="Закрыть"
-            variant={VariantsEnum.modal_registration_decline}
-            extention={Extentions.modal_registration}
-            cb={closeHandler}
-            />
+            <div className={classes.registrationWrapper}>
+                <ModalFormInner 
+                inputs={definitiveInputs}
+                />
+            <div className={classes.modalRegistrationLoginButtonsWrapper}>
+                <Button 
+                text={page === "registration" ? "Регистрация" : "Вход"}
+                variant={VariantsEnum.modal_registration_accept}
+                extention={Extentions.modal_registration}
+                cb={cb.bind(null, tempValues)}
+                />
+                <Button 
+                text="Закрыть"
+                variant={VariantsEnum.modal_registration_decline}
+                extention={Extentions.modal_registration}
+                cb={closeHandler}
+                />
+            </div>
             </div>
         ) : (
             <>
