@@ -5,7 +5,7 @@ import { FC } from 'react';
 import classes from './modal.module.css'
 import { modalType } from '../../functions/Modal/modalType';
 import {useTransition, animated} from 'react-spring'
-import { ModalInitialStatePageTypeType } from '../../store/reducers/Types/modal.reducer.types';
+import { ModalInitialStatePageTypeType } from '../../store/reducers/modalReducer/Types/modal.reducer.types';
 
 export const Modal:FC = () => {
     const type = useSelector<RootState, ModalComponentTypeType>(state => state.modal.type)

@@ -1,8 +1,8 @@
 import { FC, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { InitialStateLoginRegistrationInputs } from "../../../store/reducers/Types/modal.reducer.types";
+import { InitialStateLoginRegistrationInputs } from "../../../store/reducers/modalReducer/Types/modal.reducer.types";
 import { AppDispatch, RootState } from "../../../store/Types/store.types";
-import {modalActionCreators} from '../../../store/reducers/modal.reducer'
+import {modalActionCreators} from '../../../store/reducers/modalReducer/modal.reducer'
 import { ModalFormInner } from "./ModalFormInner";
 import { inputInjectChange } from "../../../functions/Modal/registrationInputInjectChange";
 import Button from "../../Buttons/Button"

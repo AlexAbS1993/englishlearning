@@ -17,11 +17,16 @@
 }
 
 .modal_affremative {
-    width: 80px;
+    min-width: 80px;
     height: 40px;
-    padding: 2px 5px;
+    padding: 2px 15px;
     margin: 2px 5px;
     cursor: pointer;
+    border: none;
+    transition: .2s all linear;
+}
+.modal_affremative:hover {
+    transform: translateY(-3px);
 }
 
 .modal_affremative_accept{

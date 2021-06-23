@@ -16,11 +16,17 @@ code {
 
 :root {
   --firts_theme_color: #ED635F;
-  --second_theme_color: #59414F;
+  --second_theme_color: #8d0c57;
   --accept_theme_color: #50C878;
   --decline_theme_color: #F8C3C3;
 }
 
+h1, h2, h3 {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 600;
+  letter-spacing: -.1px;
+  color: var(--decline_theme_color)
+}
 
 label {
   font-family: 'Roboto Mono', monospace;

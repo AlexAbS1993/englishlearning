@@ -1,8 +1,25 @@
 .navBarWrapper {
     width: 100vw;
-    height: 10%;
-    background: linear-gradient(to bottom, blue, rgb(73, 73, 129));
+    height: 5%;
+    background: linear-gradient(to top, var(--firts_theme_color), var(--second_theme_color));
     display: grid;
-    grid-template-columns: 5fr 1fr;
+    justify-content: center;
 }
 
+.navBarInnerWrapper {
+    display: grid;
+    width: calc(70vw + 10vmax);
+    grid-template-columns: 70% calc(32px*3 + 15px*2);
+}
+
+@media screen and (max-width: 500px) {
+    .navBarInnerWrapper {
+        display: grid;
+        width: 90vw;
+        grid-template-columns: 50% 50%;
+    }
+}
+
+.navBarInnerWrapper>h1{
+    font-size: calc(10px + .5vmax);
+}

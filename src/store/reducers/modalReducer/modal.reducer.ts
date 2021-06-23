@@ -1,4 +1,4 @@
-import { ModalComponentTypeType } from '../../components/Modals/Types/modal.component.types';
+import { ModalComponentTypeType } from '../../../components/Modals/Types/modal.component.types';
 import { 
     ModalReducerInitialStateType, 
     ModalReducerActionType, 

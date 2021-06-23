@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../../store/Types/store.types"
-import {modalActionCreators} from '../../../store/reducers/modal.reducer'
+import {modalActionCreators} from '../../../store/reducers/modalReducer/modal.reducer'
 import { ModalAffermativeInner } from "./ModalAffermativeInner"
 const {clearModal} = modalActionCreators
 

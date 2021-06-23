@@ -1,0 +1,11 @@
+.linkBlockWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+    align-items: center;
+    justify-items: center;
+}
+
+.linkBlockAuth {
+    grid-column: 1/4;
+}

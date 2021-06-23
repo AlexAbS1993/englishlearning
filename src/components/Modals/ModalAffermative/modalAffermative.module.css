@@ -1,6 +1,6 @@
 .modalAffermative {
     width: calc(200px + 10vmax);
-    height: calc(100px + 5vmax);
+    min-height: calc(100px + 5vmax);
     border: 1px solid black;
     display: grid;
     grid-template-columns: 1fr;

@@ -1,6 +1,6 @@
 import { modalActionCreators } from './../modal.reducer';
 import { modalInitialState } from "../modal.reducer"
-import { ModalComponentTypeType } from '../../../components/Modals/Types/modal.component.types';
+import { ModalComponentTypeType } from '../../../../components/Modals/Types/modal.component.types';
 
 export type ModalReducerInitialStateType = typeof modalInitialState
 
