@@ -1,0 +1,12 @@
+.notifyWrapper {
+    width: 300px;
+    height: 80px;
+    background-color: rgba(22, 21, 21, 0.705);
+    padding: 0px 0px 0px 10px;
+    color: white;
+    box-shadow: 0px 0px 5px 5px gray;
+    position: absolute;
+    right: 50px;
+    top: 50px;
+    z-index: 5;
+}

@@ -40,6 +40,9 @@ export const modalActionCreators = {
     },
     clearModal: () => {
         return {type: `${prefix}CLEAR_MODAL`} as const
+    },
+    testErrorNot: () => {
+        throw new Error("Ошибка. Тест. Проверка работы")
     }
 }
 
