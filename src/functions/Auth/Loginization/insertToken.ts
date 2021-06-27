@@ -6,3 +6,7 @@ export const insertToken = (isRemember: boolean, token: string) => {
     sessionStorage.setItem("token", token)
     return
 }
+
+export const extractToken = () => {
+    return localStorage.getItem("token")
+}

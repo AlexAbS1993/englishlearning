@@ -91,5 +91,5 @@ export const ErrorThunk = (message: string) => (dispatch: AppDispatch) => {
         dispatch(notifyActionCreators.setClearReducer())
     }, 3000)
     dispatch(notifyActionCreators.setError(true))
-    dispatch(notifyActionCreators.setErrorTest(errorDescription(message)))
+    dispatch(notifyActionCreators.setErrorTest(message))
 }
