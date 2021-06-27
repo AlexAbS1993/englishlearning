@@ -1,13 +1,23 @@
 import { copyStatisticFromGuest } from "../Guest/copyStatisticFromGuest"
+import userAPI from '../../../api/auth'
+const {toRegistrate} =  userAPI
 
-export const testFunc = (data:any) => {
-    if (data.isStatisticCopy){
-        console.log(copyStatisticFromGuest(data))
-    }
-   else {
-    console.log({
-        login: data.login,
-        password: data.password
-    })
-   }
+export type dataType = {
+    login: string,
+    password: string,
+    isStatisticCopy: boolean
+}
+
+export const testFunc = async (data:dataType) => {
+    let response
+        if (data.isStatisticCopy){
+            response = await toRegistrate(copyStatisticFromGuest(data))
+        }
+       else {
+        response = await toRegistrate({
+            login: data.login,
+            password: data.password
+        })
+       }
+       return response
 }

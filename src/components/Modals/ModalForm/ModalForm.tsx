@@ -20,14 +20,14 @@ export const ModalForm:FC<ModalRegistrationLoginType> = ({page}) => {
     const inputs = useSelector<RootState, InitialStateLoginRegistrationInputs[]>(state => state.modal.login_registraton.inputs)
     useEffect(() => {
         let fields:any = {}
-        for (let i = 0; i < inputs.length; i++){{
+        for (let i = 0; i < inputs.length; i++){
             if (inputs[i].type === "checkbox"){
                 fields[inputs[i].name] = false
             }
             else {
                 fields[inputs[i].name] = ""
             } 
-        }}
+        }
         setChange({...fields})
         setTempValuesDone(true)
     }, [])
@@ -36,7 +36,7 @@ export const ModalForm:FC<ModalRegistrationLoginType> = ({page}) => {
             setInitialize(true)
         }
     }, [isTempValuesDone])
-    const cb = useSelector<RootState, (args:any) => void>(state => state.modal.login_registraton.cb)
+    const cb = useSelector<RootState, (...args:any) => void>(state => state.modal.login_registraton.cb)
     const dispatch:AppDispatch = useDispatch()
     const closeHandler = () => {
         dispatch(clearModal())

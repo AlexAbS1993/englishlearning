@@ -1,0 +1,9 @@
+.stringLink {
+    text-decoration: none;
+    color: var(--accept_theme_color);
+    font-size: calc(15px + .5vmax);
+}
+
+.stringLink:hover {
+    text-decoration: underline var(--second_theme_color);
+}

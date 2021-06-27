@@ -12,7 +12,7 @@ export const NofificationInner:FC<NotificationInnerType> = ({isNotify, text}) =>
     return (
         <>
         {
-            transition((style, item) => item && <animated.div style={style} className={classes.notifyWrapper}>
+            transition((style, item) => item && <animated.div style={style} className={`${classes.notifyErrorWrapper} ${classes.notifyWrapper}`}>
             <p>{text}</p>
             </animated.div>
             )

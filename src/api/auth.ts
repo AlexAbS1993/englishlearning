@@ -7,14 +7,14 @@ const instance = axios.create({
 })
 
 class userAPI{
-    async getLogin(){
+    getLogin(){
 
     }
-    async toRegistrate(data: RegistrationDataType){
-        await instance.post("/createUser", data)
+    toRegistrate(data: RegistrationDataType){
+        return instance.post("/createUser", data)
     }
-    async toLogin(data: LoginInType){
-        await instance.post("/loginIn", data)
+    toLogin(data: LoginInType){
+        return instance.post("/loginIn", data)
     }
 }
 

@@ -1,3 +1,5 @@
+import { errorDescription } from '../../../functions/Error/errorDescription';
+import { AppDispatch } from '../../Types/store.types';
 import { notifyActionCreatorsType, notifyInitialStateType, notyfiTypes } from './Types/notify.reducer.types';
 
 
@@ -73,4 +75,21 @@ export const notifyReducer = (state: notifyInitialStateType = notifyInitialState
             return state
         }
     }
+}
+
+export const NotifyThunk = (message:string, notifyType:notyfiTypes) => (dispatch: AppDispatch) => {
+    setTimeout(() => {
+        dispatch(notifyActionCreators.setClearReducer())
+    }, 3000)
+    dispatch(notifyActionCreators.setNotify(true))
+    dispatch(notifyActionCreators.setNotifyText(message))
+    dispatch(notifyActionCreators.setNotifyType(notifyType))
+}
+
+export const ErrorThunk = (message: string) => (dispatch: AppDispatch) => {
+    setTimeout(() => {
+        dispatch(notifyActionCreators.setClearReducer())
+    }, 3000)
+    dispatch(notifyActionCreators.setError(true))
+    dispatch(notifyActionCreators.setErrorTest(errorDescription(message)))
 }

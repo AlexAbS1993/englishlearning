@@ -2,10 +2,9 @@ import { useCallback } from "react";
 import {IconButton} from "../Buttons/Button";
 import { Extentions, ImageStateIconButton, VariantsEnum } from "../Buttons/Types/Button.component.types";
 import { modalActionCreators } from "../../store/reducers/modalReducer/modal.reducer";
-import { AppDispatch } from "../../store/Types/store.types";
+import { ThunkDispatch } from "../../store/Types/store.types";
 import { useDispatch } from "react-redux";
 import { inputsRegistration, inputsLogin } from "../../assets/datas/registration.datas";
-import { testFunc } from "../../functions/Auth/Registration/submitRegistration";
 import registration_simple from '../../assets/icons/Registration/registration_simple.png'
 import registration_hovered from '../../assets/icons/Registration/registration_hovered.png'
 import login_hover from '../../assets/icons/Login/login_hover.png'
@@ -13,7 +12,8 @@ import login_simple from '../../assets/icons/Login/login_simple.png'
 import info_simple from '../../assets/icons/Information/info_simple.png'
 import info_hovered from '../../assets/icons/Information/info_hovered.png'
 import { registrationLoginInfo } from "../../assets/datas/registrationInfo.datas";
-import { submitLogin } from "../../functions/Auth/Loginization/submitLogin";
+
+import { loginisationThunk, testRegistrationThunk } from "../../store/reducers/authReducer/auth.reducer";
 const {setOpen, setType, setMarkup, setPage} = modalActionCreators
 
 const enterImage = {
@@ -30,24 +30,28 @@ const infoImage = {
 }
 
 export const LinkBlockWithoutAuth = () => {
-    const dispatch:AppDispatch = useDispatch() 
+    const dispatch:ThunkDispatch = useDispatch() 
     const enterModalFunc = useCallback(() => {
         dispatch(setType("login"))
         dispatch(setPage("login"))
-        dispatch(setMarkup({modalType:"login", inputs: inputsLogin, cb: submitLogin}))
+        dispatch(setMarkup({modalType:"login", inputs: inputsLogin, cb: (data: any) => {dispatch(loginisationThunk(data))}}))
         dispatch(setOpen(true))
-    }, []) 
+    }, [dispatch]) 
     const registrationModalFunc = useCallback(() => {
         dispatch(setType("registration"))
         dispatch(setPage("registration"))
-        dispatch(setMarkup({modalType:"registration", inputs: inputsRegistration, cb: testFunc}))
+        dispatch(setMarkup({
+            modalType:"registration", 
+            inputs: inputsRegistration, 
+            cb: (data) => {dispatch(testRegistrationThunk(data))}
+        }))
         dispatch(setOpen(true))
-    }, [])
+    }, [dispatch])
     const infoModalFunc = useCallback(() => {
         dispatch(setType("affermative"))
         dispatch(setMarkup({modalType:"affermative", text: registrationLoginInfo, cb:() => {registrationModalFunc()}}))
         dispatch(setOpen(true))
-    }, [])
+    }, [dispatch])
     return (
         <>
                         <IconButton 

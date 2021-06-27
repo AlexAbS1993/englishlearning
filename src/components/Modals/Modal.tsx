@@ -14,7 +14,7 @@ export const Modal:FC = () => {
     const transition = useTransition(isOpen, {
         from: {opacity: 0},
         enter: {opacity: 1},
-        leave: {opacity: 0}
+        leave: {opacity: 0, config:{duration: 40}}
     })
     return (
         <>

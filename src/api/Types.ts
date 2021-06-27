@@ -1,3 +1,8 @@
+export type responseType = {
+    data: any,
+    message: string
+}
+
 
 type statisticGuestType = {
     points: number
