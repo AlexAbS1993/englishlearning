@@ -9,7 +9,7 @@ const instance = axios.create({
 
 class userAPI{
     getLogin(){
-        return instance.get("/getLogin", {
+        return instance.get("/isLogin", {
             headers: {
                 Authorization: extractToken()
             }

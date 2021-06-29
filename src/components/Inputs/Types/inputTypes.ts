@@ -4,5 +4,6 @@ export type InputSimpleType = {
     label: string,
     name: string, 
     onChange: (e: any) => void,
-    labelImg?: string
+    labelImg?: string,
+    schema?: any
 }

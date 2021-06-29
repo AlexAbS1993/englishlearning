@@ -1,9 +1,8 @@
-export const submitLogin = (data:any ) => {
-    console.log(data) 
-    return {
-        data: {
-            message: "Добро пожаловать",
-            data: "тут пусто"
-        }
-    }
+import { responseType } from "../../../api/Types";
+import userAPI from '../../../api/auth'
+const {toLogin} = userAPI
+
+export const submitLogin = async(data:any):Promise<any&responseType> => {
+        let response = await toLogin(data)
+        return response
 }

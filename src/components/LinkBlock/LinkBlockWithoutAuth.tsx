@@ -14,6 +14,9 @@ import info_hovered from '../../assets/icons/Information/info_hovered.png'
 import { registrationLoginInfo } from "../../assets/datas/registrationInfo.datas";
 
 import { loginisationThunk, testRegistrationThunk } from "../../store/reducers/authReducer/auth.reducer";
+import { validateInjector } from "../../functions/Validator/validateInjector";
+import { validateAPI } from "../../api/validate";
+import { schemaParser } from "../../functions/Validator/schemaParser";
 const {setOpen, setType, setMarkup, setPage} = modalActionCreators
 
 const enterImage = {
@@ -37,12 +40,13 @@ export const LinkBlockWithoutAuth = () => {
         dispatch(setMarkup({modalType:"login", inputs: inputsLogin, cb: (data: any) => {dispatch(loginisationThunk(data))}}))
         dispatch(setOpen(true))
     }, [dispatch]) 
-    const registrationModalFunc = useCallback(() => {
+    const registrationModalFunc = useCallback(async() => {
         dispatch(setType("registration"))
         dispatch(setPage("registration"))
+        let schema = await schemaParser(validateAPI.getRegistrationValidate)
         dispatch(setMarkup({
             modalType:"registration", 
-            inputs: inputsRegistration, 
+            inputs: validateInjector(schema, inputsRegistration), 
             cb: (data) => {dispatch(testRegistrationThunk(data))}
         }))
         dispatch(setOpen(true))

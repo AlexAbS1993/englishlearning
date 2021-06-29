@@ -15,6 +15,7 @@ export const ModalFormInner:FC<ModalRegistrationInnerType> = ({inputs}) => {
                     type={element.type}
                     name={element.name}
                     onChange={element.onChange}
+                    schema={element.validator}
                     />
                 })
             }

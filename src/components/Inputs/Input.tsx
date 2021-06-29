@@ -2,9 +2,13 @@ import { FC, useState } from "react"
 import { InputSimpleType } from "./Types/inputTypes"
 import classes from './input.module.css'
 import { currentInputClassName } from "../../functions/Inputs/currentInputClassName"
+import { validator } from "../../functions/Validator/validator"
 
-export const Input:FC<InputSimpleType> = ({name, id, onChange, type, label, labelImg}) => {
+export const Input:FC<InputSimpleType> = ({name, id, onChange, type, label, labelImg, schema}) => {
+    const [fieldErrorText, setTextError] = useState<string>("")
+    const [isFieldDirt, setDirtField] = useState(false)
     const [isChecked, setCheck] = useState(false) 
+    const [isHovered, setIsHovered] = useState(false)
     const checkHandleChange = () => {
         setCheck(!isChecked)
         onChange(!isChecked)}
@@ -35,12 +39,37 @@ export const Input:FC<InputSimpleType> = ({name, id, onChange, type, label, labe
                         type={type} 
                         name={name} 
                         id={id} 
-                        onChange={onChange} 
-                        className={classes.inputInput}
+                        onChange={(event) => {
+                            onChange(event)
+                            if (schema){
+                                validator(setTextError, schema, event.target.value)
+                            }
+                        }
+                        } 
+                        onBlur={() => {
+                            setDirtField(true)
+                        }}
+                        className={`${classes.inputInput} ${(fieldErrorText && isFieldDirt) && `${classes.inputInputError}`}`}
                         />
                     </div>
                 }
-                
+                 {
+                        (isFieldDirt && fieldErrorText) && <>
+                            <div className={classes.errorInput}> <span 
+                            onMouseEnter={() => {
+                                setIsHovered(true)
+                                setTimeout(() => {
+                                    setIsHovered(false)
+                                }, 2500)
+                            }}
+                            >{fieldErrorText}</span>
+                            {
+                                isHovered && <div className={classes.hoveredErrorTip}> 
+                                {fieldErrorText}
+                                </div>
+                            }</div>
+                        </>
+                    }
                 
         </div>
     )

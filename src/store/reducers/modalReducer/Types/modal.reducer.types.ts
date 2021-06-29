@@ -27,7 +27,8 @@ export type InitialStateLoginRegistrationInputs = LoginRegistrationInput
 
 export type InitialStateLoginRegistration = {
     inputs: InitialStateLoginRegistrationInputs[],
-    cb: (args: any) => void
+    cb: (args: any) => void,
+    validator?: any
 }
 
 export type ModalReducerSetMarkUpDataType = InitialStateAffrimitiveType&{modalType: Extract<ModalComponentTypeType, "affermative">} 

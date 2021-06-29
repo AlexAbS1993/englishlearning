@@ -7,6 +7,6 @@ export type ModalRegistrationLoginType = {
         page: "registration"|"login"
 }
 export type ModalRegistrationInnerType = {
-    inputs: (InitialStateLoginRegistrationInputs&{onChange: (e:any) => void})[]
+    inputs: (InitialStateLoginRegistrationInputs&{onChange: (e:any) => void}&{validator?:any})[]
 }
-export type ModalRegistrationInnerMappedType = InitialStateLoginRegistrationInputs&{onChange: (e: any) => void}
+export type ModalRegistrationInnerMappedType = InitialStateLoginRegistrationInputs&{onChange: (e: any) => void}&{schema:any}

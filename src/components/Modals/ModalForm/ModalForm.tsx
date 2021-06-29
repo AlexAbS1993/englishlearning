@@ -9,6 +9,7 @@ import Button from "../../Buttons/Button"
 import { Extentions, VariantsEnum } from "../../Buttons/Types/Button.component.types"
 import classes from './modalForm.module.css'
 import { ModalRegistrationLoginType } from "../Types/modal.component.types";
+import { notyfiTypes } from "../../../store/reducers/NotifyErrorReducer/Types/notify.reducer.types";
 
 const {clearModal} = modalActionCreators
 
@@ -18,6 +19,7 @@ export const ModalForm:FC<ModalRegistrationLoginType> = ({page}) => {
     const [tempValues, setChange] = useState({})
     const [isTempValuesDone, setTempValuesDone] = useState(false)
     const inputs = useSelector<RootState, InitialStateLoginRegistrationInputs[]>(state => state.modal.login_registraton.inputs)
+    const notType = useSelector<RootState, notyfiTypes>(state => state.notify.notifyType)
     useEffect(() => {
         let fields:any = {}
         for (let i = 0; i < inputs.length; i++){
@@ -44,6 +46,14 @@ export const ModalForm:FC<ModalRegistrationLoginType> = ({page}) => {
     const definitiveInputs = useMemo(() => {
         return inputInjectChange(inputs, setChange, tempValues)
     }, [initialize])
+    useEffect(() => {
+        if (page === "registration" && notType === notyfiTypes.registration_done){
+            closeHandler()
+        }
+        if (page === "login" && notType === notyfiTypes.login_done){
+            closeHandler()
+        }
+    }, [notType, page])
     return ( <>
         {initialize ?  
             (

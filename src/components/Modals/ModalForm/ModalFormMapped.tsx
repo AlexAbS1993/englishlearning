@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import { Input } from "../../Inputs/Input"
 import { ModalRegistrationInnerMappedType } from "../Types/modal.component.types"
 
-export const ModalFormMapped:FC<ModalRegistrationInnerMappedType> = React.memo(({id, onChange, name, label, type, labelImg}) => {
+export const ModalFormMapped:FC<ModalRegistrationInnerMappedType> = React.memo(({id, onChange, name, label, type, labelImg, schema}) => {
     return (
         <Input
         labelImg={labelImg}
@@ -11,6 +11,7 @@ export const ModalFormMapped:FC<ModalRegistrationInnerMappedType> = React.memo((
         name={name}
         label={label}
         type={type}
+        schema={schema}
         />
     )
 })
