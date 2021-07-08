@@ -10,12 +10,14 @@ export type LoginResponseBodyType = {
         isRemember: boolean,
         id: number,
         statistic: any,
-        token: string
+        token: string,
+        role: "user"|"admin"
 }
 
 export type loginInResponseBodyType = {
         login: string,
         id: number,
         message: string,
-        statistic: any
+        statistic: any,
+        role: "user"|"admin"
 }

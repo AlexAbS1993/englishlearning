@@ -4,7 +4,7 @@ import { ModalComponentTypeType } from '../../../../components/Modals/Types/moda
 
 export type ModalReducerInitialStateType = typeof modalInitialState
 
-export type ModalInitialStatePageTypeType = "registration"| "login"
+export type ModalInitialStatePageTypeType = "registration"| "login"|"newWord"
 
 type inferActionType<T> = T extends {[key: string]: infer Z} ? Z : never 
 export type ModalReducerActionType = ReturnType<inferActionType<typeof modalActionCreators>>
@@ -34,3 +34,7 @@ export type InitialStateLoginRegistration = {
 export type ModalReducerSetMarkUpDataType = InitialStateAffrimitiveType&{modalType: Extract<ModalComponentTypeType, "affermative">} 
 | 
 InitialStateLoginRegistration&{modalType: Exclude<ModalComponentTypeType, "affermative">}
+
+export type newWordFormType = {
+    name: string, id:string, label: string, type: string
+}

@@ -1,16 +1,16 @@
-import { FC, useEffect, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { IconButtonType, SimpleButtonType } from "./Types/Button.component.types"
 import classes from './Button.module.css'
 
-const Button:FC<SimpleButtonType> = ({extention, variant, cb, text}) => {
+const Button:FC<SimpleButtonType> = React.memo(({extention, variant, cb, text}) => {
     return (
-        <button onClick={cb} className={`${classes[extention]} ${classes[variant]}`}>
+        <button data-testid="simplebutton" onClick={cb} className={`${classes[extention]} ${classes[variant]}`}>
             {
                 text && text 
             }
         </button>
     )
-}
+})
 
 export default Button
 
@@ -18,7 +18,6 @@ export const IconButton:FC<IconButtonType> = ({extention, variant, cb, images, a
     const [currentImage, setCurrentImage] = useState(images.simple)
     useEffect(() => {
         if (activeToggle && images.active){
-            console.log('here')
                 setCurrentImage(images.active)
         }
         if (!activeToggle && images.active){

@@ -20,7 +20,8 @@ export const modalInitialState = {
     login_registraton: {
         inputs: [] as InitialStateLoginRegistrationInputs[],
         cb: () => {},
-    } as InitialStateLoginRegistration
+    } as InitialStateLoginRegistration,
+    isFormNeedToClear: false as boolean
 }
 
 const prefix = "MODAL_REDUCER:"
@@ -43,6 +44,9 @@ export const modalActionCreators = {
     },
     testErrorNot: () => {
         throw new Error("Ошибка. Тест. Проверка работы")
+    },
+    clearModalForm: (toggle: boolean) => {
+        return {type: `${prefix}CLEAR_FORM`, toggle} as const
     }
 }
 
@@ -76,7 +80,7 @@ export const modalReducer = (state: ModalReducerInitialStateType = modalInitialS
                     }
                 }
             }
-            if (action.data.modalType === "login" || action.data.modalType === "registration"){
+            if (action.data.modalType === "login" || action.data.modalType === "registration" || action.data.modalType === "newWord"){
                 const {inputs, cb} = action.data
                 return {
                     ...state,
@@ -91,6 +95,12 @@ export const modalReducer = (state: ModalReducerInitialStateType = modalInitialS
         case "MODAL_REDUCER:CLEAR_MODAL": {
             return {
                 ...modalInitialState}
+        }
+        case "MODAL_REDUCER:CLEAR_FORM": {
+            return {
+                ...state,
+                isFormNeedToClear: action.toggle
+            }
         }
         default: {
             return state

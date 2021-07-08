@@ -1,0 +1,12 @@
+.addDeleteBlockWrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 5px;
+    height: inherit;
+}
+
+
+.actionButtonsContainer {
+    display: grid;
+    align-items: center;
+}

@@ -1,4 +1,4 @@
-.simple {
+.simple { /* Простая кнопка EXTENTION*/
     background-color: var(--firts_theme_color);
     border: none;
     cursor: pointer;
@@ -10,13 +10,13 @@
     color: rgb(255, 255, 255);
 }
 
-.simple_small {
+.simple_small { /* Маленькая кнопка */
     padding: 2px 5px;
     width: 60px;
     height: 30px;
 }
 
-.modal_affremative {
+.modal_affremative { /* Кнопка для модального окна информации-подтверждения EXTENTION*/
     min-width: 80px;
     height: 40px;
     padding: 2px 15px;
@@ -37,7 +37,7 @@
     background-color: var(--decline_theme_color);
 }
 
-.modal_registration{
+.modal_registration{ /* Общая стилистика кнопки для окна регистрации EXTENTION*/
     min-width: 100px;
     height: 40px;
     padding: 4px 15px;
@@ -51,15 +51,15 @@
     transform: translateY(-3px);
 }
 
-.modal_registration_accept {
+.modal_registration_accept { /* Стили для кнопки принятия в окне регистрации-логинизации */
     background-color: var(--accept_theme_color);
 }
 
-.modal_registration_decline {
+.modal_registration_decline {/* Стили для кнопки отклонения в окне регистрации-логинизации */
     background-color: var(--decline_theme_color);
 }
 
-.nav_bar_icon {
+.nav_bar_icon { /* Кнопка в стиле иконки для навбара и прочего EXTENTION */
     width: 32px;
     height: 32px;
     cursor: pointer;
@@ -68,7 +68,7 @@
     background-color: inherit;
 }
 
-.nav_bar_icon>img {
+.nav_bar_icon>img { /* Стили для картинки внутри кнопки-иконки*/
     object-fit: contain;
     width: 100%;
     height: 100%;

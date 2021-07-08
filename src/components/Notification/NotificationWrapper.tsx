@@ -4,7 +4,7 @@ import { RootState } from "../../store/Types/store.types"
 import { ErrorInner } from "./ErrorInner"
 import { NofificationInner } from "./NotificationInner"
 
-export const NotificationWrapper:FC = () => {
+const NotificationWrapper:FC = () => {
     const text = useSelector<RootState, string>(state => state.notify.notifyText)
     const isNotify = useSelector<RootState, boolean>(state => state.notify.isNotify)
     const isError = useSelector<RootState, boolean>(state => state.notify.isError)
@@ -22,3 +22,5 @@ export const NotificationWrapper:FC = () => {
         </>
     )
 }
+
+export default NotificationWrapper

@@ -15,7 +15,8 @@ export const authInitialState = {
     login: null as string|null,
     initialize: false as boolean,
     loading: false as boolean,
-    id: null as number|null
+    id: null as number|null,
+    role: null as "admin"|"user"|null
 }
 
 const prefix = "AUTH:"
@@ -24,8 +25,8 @@ export const authActionCreators = {
     setIsAuth: (value: boolean) => {
         return {type: `${prefix}SET_IS_AUTH`, value} as const
     },
-    setLogin: (login: string, id: number) => {
-        return {type: `${prefix}SET_LOGIN`, login, id} as const
+    setLogin: (login: string, id: number, role: "admin"|"user") => {
+        return {type: `${prefix}SET_LOGIN`, login, id, role} as const
     },
     setInitialize: (value: boolean) => {
         return {type: `${prefix}SET_AUTH_INIT`, value} as const
@@ -47,7 +48,8 @@ export const authReducer = (state: authInitialStateType = authInitialState, acti
             return {
                 ...state,
                 login: action.login,
-                id: action.id
+                id: action.id,
+                role: action.role
             }
         }
         case "AUTH:SET_AUTH_INIT":{
@@ -83,7 +85,7 @@ export const loginisationThunk = (data: any) => async(dispatch: ThunkDispatch) =
         let response = await submitLogin(data)
         let responseBody: LoginResponseBodyType = response.data
         dispatch(NotifyThunk(notErrExtractor("not", responseBody), notyfiTypes.login_done))
-        dispatch(authActionCreators.setLogin(responseBody.login, responseBody.id))
+        dispatch(authActionCreators.setLogin(responseBody.login, responseBody.id, responseBody.role))
         dispatch(authActionCreators.setIsAuth(true))
         const {isRemember, token} = responseBody
         insertToken(isRemember, token)
@@ -98,7 +100,7 @@ export const getLoginThunk = () => async (dispatch: ThunkDispatch) => {
         dispatch(authActionCreators.setInitialize(false))
         let response = await getLoginForToken()
         let responseBody: loginInResponseBodyType = response.data 
-        dispatch(authActionCreators.setLogin(responseBody.login, responseBody.id))
+        dispatch(authActionCreators.setLogin(responseBody.login, responseBody.id, responseBody.role))
         dispatch(authActionCreators.setIsAuth(true))
     }
     catch(e){

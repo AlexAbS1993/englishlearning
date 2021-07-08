@@ -1,19 +1,25 @@
 .navBarWrapper {
-    width: 100vw;
     height: 8vh;
     max-height: 65px;
     background: linear-gradient(to top, var(--firts_theme_color), var(--second_theme_color));
     display: grid;
     justify-content: center;
-
 }
 
 .navBarInnerWrapper {
     display: grid;
     width: calc(70vw + 10vmax);
-    grid-template-columns: 70% calc(32px*3 + 15px*2);
+    grid-template-columns: 75% calc(32px*5 + 15px*4);
     align-items: center;
+    height: inherit;
 }
+
+@media screen and (max-width: 800px) {
+    .navBarInnerWrapper {
+        grid-template-columns: 55% calc(32px*5 + 15px*4);
+    }
+}
+
 
 @media screen and (max-width: 500px) {
     .navBarInnerWrapper {

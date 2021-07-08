@@ -9,5 +9,8 @@ const instance = axios.create({
 export const validateAPI = {
     getRegistrationValidate: async() => {
         return instance.get("/registration")
+    },
+    getNewWordValidate: async() => {
+        return instance.get('/newWord')
     }
 }

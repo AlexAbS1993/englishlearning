@@ -7,7 +7,7 @@ const {clearModal} = modalActionCreators
 
 
 
-export const ModalAffermative:FC = () => {
+const ModalAffermative:FC = () => {
     const text = useSelector<RootState, string>(state => state.modal.affermative.text)
     const cb = useSelector<RootState, (args: any) => void>(state => state.modal.affermative.cb)
     const dispatch: AppDispatch = useDispatch()
@@ -20,3 +20,5 @@ export const ModalAffermative:FC = () => {
         </>
     )
 }
+
+export default ModalAffermative

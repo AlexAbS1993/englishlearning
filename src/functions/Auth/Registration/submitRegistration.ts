@@ -12,6 +12,8 @@ export const testFunc = async (data:dataType) => {
     let response
         if (data.isStatisticCopy){
             response = await toRegistrate(copyStatisticFromGuest(data))
+            localStorage.removeItem("guestlearning")
+            localStorage.removeItem("gueststatistic")
         }
        else {
         response = await toRegistrate({

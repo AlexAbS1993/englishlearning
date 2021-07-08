@@ -1,0 +1,39 @@
+.newWordBlockWrapper {
+    grid-column: 1/2;
+    border-radius: 10px;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+.newWordBlockInnerWrapper {
+    width: 90%;
+    height: 85%;
+    border-top: 1px solid tomato;
+    border-bottom: 1px solid tomato;
+    padding: 5px 0px;
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+    grid-template-columns: 100%;
+}
+
+.wordsCountWrapper {
+    display: grid;
+    justify-self: center;
+    align-items: center;
+    grid-template-columns: 2fr 1fr;
+    height: 100%;
+    width: 70%;
+    justify-items: center;
+    border-bottom: rgb(173, 83, 71) 1px solid;
+}
+
+@media screen and (max-width: 400px) {
+    .wordsCountWrapper  {
+        width: 100%;
+        border-bottom: none;
+    }
+}

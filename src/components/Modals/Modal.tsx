@@ -7,7 +7,7 @@ import { modalType } from '../../functions/Modal/modalType';
 import {useTransition, animated} from 'react-spring'
 import { ModalInitialStatePageTypeType } from '../../store/reducers/modalReducer/Types/modal.reducer.types';
 
-export const Modal:FC = () => {
+const Modal:FC = () => {
     const type = useSelector<RootState, ModalComponentTypeType>(state => state.modal.type)
     const page = useSelector<RootState, ModalInitialStatePageTypeType>(state => state.modal.page)
     const isOpen = useSelector<RootState, boolean>(state => state.modal.isOpen)
@@ -30,3 +30,4 @@ export const Modal:FC = () => {
         </>
     )
 }
+export default Modal

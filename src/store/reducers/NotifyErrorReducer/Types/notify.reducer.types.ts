@@ -7,5 +7,6 @@ export type notifyActionCreatorsType = ReturnType<typeof notifyActionCreators[ke
 export enum notyfiTypes{
     "registration_done" = "registration_done",
     "login_done" = "login_done",
-    "test" = "test"
+    "test" = "test",
+    "new_word_added" = "new_word_added"
 }

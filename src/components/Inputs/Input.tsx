@@ -5,13 +5,19 @@ import { currentInputClassName } from "../../functions/Inputs/currentInputClassN
 import { validator } from "../../functions/Validator/validator"
 
 export const Input:FC<InputSimpleType> = ({name, id, onChange, type, label, labelImg, schema}) => {
+    // Стейт текста ошибки
     const [fieldErrorText, setTextError] = useState<string>("")
+    // Состояние "грязного" инпута
     const [isFieldDirt, setDirtField] = useState(false)
+    // Управление чекбоксом
     const [isChecked, setCheck] = useState(false) 
+    // Переключатель для наведения на подсказку
     const [isHovered, setIsHovered] = useState(false)
+    // Установка состояния чекбокса и отправка его состояния в общий стейт
     const checkHandleChange = () => {
         setCheck(!isChecked)
         onChange(!isChecked)}
+    // РЕНДЕР
     return (
         <div className={`${currentInputClassName(type, classes)}`}>
             <div><label htmlFor={id} className={classes.inputLabel}>{label}</label></div>
@@ -30,12 +36,8 @@ export const Input:FC<InputSimpleType> = ({name, id, onChange, type, label, labe
                 {
                     (type === "text" || type === "password") && 
                     <div className={classes.inputInputWrapper}>
-                {
-                    labelImg && <div className={classes.labelImgWrapper}> 
-                        <img alt="Иконка перед полем" src={labelImg}/>
-                    </div>
-                }
                         <input 
+                        autoComplete="off"
                         type={type} 
                         name={name} 
                         id={id} 
@@ -51,6 +53,11 @@ export const Input:FC<InputSimpleType> = ({name, id, onChange, type, label, labe
                         }}
                         className={`${classes.inputInput} ${(fieldErrorText && isFieldDirt) && `${classes.inputInputError}`}`}
                         />
+                        {
+                    labelImg && <div className={classes.labelImgWrapper}> 
+                        <img alt="Иконка перед полем" src={labelImg}/>
+                    </div>
+                }
                     </div>
                 }
                  {

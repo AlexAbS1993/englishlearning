@@ -1,7 +1,10 @@
 export const notErrExtractor = (type: "not"|"err", res:any):string => {
     switch(type){
         case "err": {
-            return res.response.data.message
+            if (res.response){
+                return res.response.data.message
+            }
+            return "Сервер не отвечает"
         }
         case "not": {
             return res.message

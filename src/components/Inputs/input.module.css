@@ -1,7 +1,7 @@
 .inputWrapper {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 2fr 40px;
+    grid-template-rows: 1fr 1fr 40px;
     gap: 5px;
     justify-items: center;
     align-items: center;
@@ -39,9 +39,8 @@
     width: 10%;
     height: 60%;
     z-index: 2;
-}
-.labelImgWrapper:hover{
-    background-color: rgb(131, 210, 235);
+    transform: translateX(-100%);
+    opacity: 0;
 }
 
 .labelImgWrapper>img {
@@ -52,7 +51,6 @@
 
 
 .inputInput {
-    height: 70%;
     width: 100%;
     box-sizing: border-box;
     border: none;
@@ -65,6 +63,11 @@
 
 .inputInput:focus {
     outline: none;
+}
+.inputInput:focus + .labelImgWrapper {
+    transform: translateX(0%);
+    opacity: 1;
+    transition: transform .4s linear;
 }
 
 .inputLabel {

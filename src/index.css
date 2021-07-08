@@ -1,6 +1,6 @@
 body {
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -15,17 +15,25 @@ code {
 }
 
 :root {
+    box-sizing: border-box;
   --firts_theme_color: #ED635F;
   --second_theme_color: #8d0c57;
   --accept_theme_color: #50C878;
   --decline_theme_color: #F8C3C3;
+  --text_theme_color: rgb(68, 6, 6);
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4, h5 {
   font-family: 'Roboto Mono', monospace;
   font-weight: 600;
   letter-spacing: -.1px;
-  color: var(--decline_theme_color)
+  color: var(--decline_theme_color);
+  margin: 0px;
+}
+p {
+  padding: 0px;
+  margin: 0px;
+  color: var(--text_theme_color)
 }
 
 label {

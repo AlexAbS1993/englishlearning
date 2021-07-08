@@ -11,11 +11,13 @@ export const NavBar:FC<NavBarTypes> = ({type}) => {
     return (
         <div className={classes.navBarWrapper}>
             <div className={classes.navBarInnerWrapper}>
-            <div><Link 
-            text="EnglishLearning"
-            type="string" 
-            link="home"
-            /></div>
+            <div>
+                <Link 
+                text="EnglishLearning"
+                type="string" 
+                link="home"
+                />
+            </div>
             {
                 type === "outLogin" ? (
                     <>
@@ -25,6 +27,9 @@ export const NavBar:FC<NavBarTypes> = ({type}) => {
                     </>
                 ) : (
                     <>
+                     <LinkBlock 
+                    isAuth={isAuth}
+                    />
                     </>
                 )
             }

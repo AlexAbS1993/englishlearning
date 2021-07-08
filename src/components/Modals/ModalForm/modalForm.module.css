@@ -1,5 +1,5 @@
 .registrationWrapper {
-    width: calc(250px + 5vmax);
+    width: calc(250px + 10vmax);
     min-height: 40%;
 }
 

@@ -1,3 +1,5 @@
+import { wordType } from "../store/reducers/wordReducer/Types/wordReducer.types"
+
 export type responseType = {
     data: any,
     message: string
@@ -19,3 +21,5 @@ type RememberMyType = {
 }
 
 export type LoginInType = Omit<RegistrationDataType, "statistic">&RememberMyType
+
+export type wordCreateType = wordType
