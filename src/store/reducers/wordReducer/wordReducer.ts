@@ -27,6 +27,9 @@ export const wordReducerActionCreators = {
     },
     setSearchedWords: (list:  lastWordsType[]) => {
         return {type: `${prefix}SEARCHED_WORDS`, list} as const
+    },
+    setInitialSearcheWords: () => {
+        return {type: `${prefix}SEARCHED_CLEAR`} as const
     }
 }   
 
@@ -54,6 +57,12 @@ export const wordReducer = (state:wordReducerInitialStateTypes =wordReducerIniti
             return {
                 ...state,
                 searchedWords: [...action.list]
+            }
+        }
+        case "WORD_REDUCER:SEARCHED_CLEAR": {
+            return {
+                ...state,
+                searchedWords: wordReducerInitialState.searchedWords
             }
         }
         default: return state
