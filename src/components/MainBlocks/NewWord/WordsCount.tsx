@@ -1,13 +1,41 @@
-import { FC } from "react";
-import React from 'react'
+import { FC, useEffect, useState } from "react";
 import classes from "./newWord.module.css";
-import { wordsCountType } from "./Types/newWord.types";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store/Types/store.types";
+import { getCountOfWordsThunk } from "../../../store/reducers/wordReducer/wordReducer";
 
-export const WordsCount:FC<wordsCountType> = React.memo(({count}) => {
+export const WordsCount:FC = () => {
+    const wordCount = useSelector<RootState, number|null>(state => state.word.countOfWords)
+    const [isInitialize, setInitialized] = useState(false)
+    const newWordAddedToggle = useSelector<RootState, boolean>(state => state.notify.toggles.isWordAdded)
+    const wordDeletedToggle = useSelector<RootState, boolean>(state => state.notify.toggles.isWordDeleted)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        if (!isInitialize){
+            dispatch(getCountOfWordsThunk())
+        }
+        if (newWordAddedToggle||wordDeletedToggle){
+            dispatch(getCountOfWordsThunk())
+        }
+    }, [newWordAddedToggle, isInitialize, dispatch, wordDeletedToggle])
+    useEffect(() => {
+        if (wordCount){
+            setInitialized(true)
+        }
+    }, [wordCount])
     return (
-        <div className={classes.wordsCountWrapper}>
+        <>
+             {
+            isInitialize ? (
+                <div className={classes.wordsCountWrapper}>
                 <span>Количество слов</span>
-                <h4>{count}</h4>
-        </div>
-    )
-})
+                <h4>{wordCount}</h4>
+                </div>
+    ) : (
+                <div>
+                Загрузка...
+                </div>
+            )
+        }
+        </>)
+}

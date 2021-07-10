@@ -1,4 +1,5 @@
 import React, { FC, Suspense } from "react";
+import { ModalSearchAndAct } from "../../components/Modals/ModalSearchAndAct/ModalSearchAndAct";
 import { ModalComponentTypeType } from "../../components/Modals/Types/modal.component.types";
 import { ModalInitialStatePageTypeType } from "../../store/reducers/modalReducer/Types/modal.reducer.types";
 const ModalAffermative = React.lazy(() => import("../../components/Modals/ModalAffermative/ModalAffermative") )
@@ -26,6 +27,9 @@ export function modalType(type:ModalComponentTypeType, page?: ModalInitialStateP
                 return <Suspense fallback={<div>...грузим</div>}> <ModalForm page={page}/> </Suspense>
             }
             return <> </>
+        }
+        case "search": {
+            return <ModalSearchAndAct />
         }
         default: return (
             <> 

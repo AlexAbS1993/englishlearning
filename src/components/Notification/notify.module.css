@@ -5,10 +5,11 @@
     color: white;
     box-shadow: 0px 0px 5px 5px gray;
     position: absolute;
-    z-index: 5;
+    z-index: 999;
 }
 .notifyWrapper {
-    background-color: rgba(22, 21, 21, 0.705);
+    background-color: rgb(22, 21, 21);
+    color: white !important;
     right: 50px;
     top: 50px;
 }

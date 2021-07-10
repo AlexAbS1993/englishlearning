@@ -15,3 +15,23 @@ export type wordType = {
 export type AddNewWordBodyType = {
     message: string
 }
+
+export type returnDecriptorTypes = {
+    details: boolean[],
+    points: number
+}
+
+export type responseBodyGetCountOfWordsType = {
+    message: string,
+    count: number
+}
+export type responseBodygetLastThreeWordsType = {
+    message: string,
+    words: lastWordsType[]
+}
+
+export type lastWordsType = {
+    word: wordType,
+    userId: number,
+    wordId: number
+}

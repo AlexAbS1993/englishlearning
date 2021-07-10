@@ -6,7 +6,9 @@ import {
     InitialStateLoginRegistrationInputs, 
     ModalReducerSetMarkUpDataType,
     InitialStateLoginRegistration,
-    ModalInitialStatePageTypeType
+    ModalInitialStatePageTypeType,
+    searchInputsType,
+    InitialStateSearch
 } from './Types/modal.reducer.types';
 
 export const modalInitialState = {
@@ -21,7 +23,11 @@ export const modalInitialState = {
         inputs: [] as InitialStateLoginRegistrationInputs[],
         cb: () => {},
     } as InitialStateLoginRegistration,
-    isFormNeedToClear: false as boolean
+    isFormNeedToClear: false as boolean,
+    search: {
+        inputs: [] as searchInputsType[],
+        cb: () => {}
+    } as InitialStateSearch
 }
 
 const prefix = "MODAL_REDUCER:"
@@ -85,6 +91,16 @@ export const modalReducer = (state: ModalReducerInitialStateType = modalInitialS
                 return {
                     ...state,
                     login_registraton: {
+                        inputs,
+                        cb
+                    }
+                }
+            }
+            if (action.data.modalType === "search"){
+                const {inputs, cb} = action.data
+                return {
+                    ...state,
+                    search: {
                         inputs,
                         cb
                     }

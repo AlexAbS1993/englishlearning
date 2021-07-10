@@ -1,6 +1,7 @@
 import { modalActionCreators } from './../modal.reducer';
 import { modalInitialState } from "../modal.reducer"
 import { ModalComponentTypeType } from '../../../../components/Modals/Types/modal.component.types';
+import { ModalSeatchInputsType } from '../../../../components/Modals/ModalSearchAndAct/Types/modalSearchAndAct.types';
 
 export type ModalReducerInitialStateType = typeof modalInitialState
 
@@ -20,7 +21,7 @@ type LoginRegistrationInput = {
     type: string,
     id: string,
     name: string,
-    label: string,
+    label?: string,
     labelImg?: string
 }
 export type InitialStateLoginRegistrationInputs = LoginRegistrationInput
@@ -30,11 +31,19 @@ export type InitialStateLoginRegistration = {
     cb: (args: any) => void,
     validator?: any
 }
+export type InitialStateSearch = {
+    inputs: searchInputsType[],
+    cb: (args: any) => void
+}
 
 export type ModalReducerSetMarkUpDataType = InitialStateAffrimitiveType&{modalType: Extract<ModalComponentTypeType, "affermative">} 
 | 
-InitialStateLoginRegistration&{modalType: Exclude<ModalComponentTypeType, "affermative">}
+InitialStateLoginRegistration&{modalType: Exclude<ModalComponentTypeType, "affermative"|"search">}
+| 
+InitialStateSearch&{modalType: "search"}
 
 export type newWordFormType = {
     name: string, id:string, label: string, type: string
 }
+
+export type searchInputsType = ModalSeatchInputsType

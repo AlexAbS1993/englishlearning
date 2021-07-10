@@ -8,5 +8,6 @@ export enum notyfiTypes{
     "registration_done" = "registration_done",
     "login_done" = "login_done",
     "test" = "test",
-    "new_word_added" = "new_word_added"
+    "new_word_added" = "new_word_added",
+    "word_deleted" = "word_deleted"
 }

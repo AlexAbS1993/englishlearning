@@ -25,6 +25,7 @@ const ModalForm:FC<ModalRegistrationLoginType> = ({page}) => {
     // Данные из полей формы для отправки
     const [tempValues, setChange] = useState({})
     const [initialValues, setInitialValues] = useState({})
+     
     // Отметка об окончании формирования полей и эффект формирования полей
     const [isTempValuesDone, setTempValuesDone] = useState(false)
     useEffect(() => {
@@ -74,6 +75,11 @@ const ModalForm:FC<ModalRegistrationLoginType> = ({page}) => {
             setInitialize(true)
         }
     }, [isTempValuesDone])
+
+    // Внедрение в инпуты функции изменения данных
+    const definitiveInputs = useMemo(() => {
+        return inputInjectChange<InitialStateLoginRegistrationInputs>(inputs, setChange, tempValues)
+    }, [initialize])
     
     // =========================//
     const dispatch:AppDispatch = useDispatch()
@@ -87,10 +93,7 @@ const ModalForm:FC<ModalRegistrationLoginType> = ({page}) => {
         }, 100)
     }, [])
 
-    // Внедрение в инпуты функции изменения данных
-    const definitiveInputs = useMemo(() => {
-        return inputInjectChange(inputs, setChange, tempValues)
-    }, [initialize])
+
 
     // Закрытие модального окна при получении соответствующей нотификации
     useEffect(() => {

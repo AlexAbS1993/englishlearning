@@ -24,6 +24,17 @@ export const validator = (errorSetter: any, schema: any, value: string) => {
             }
         }
     }
+    if (schema.isUrl){
+        if (schema.isUrl.type === "regexp"){
+            let message = schema.isUrl.message
+            if (Array.isArray(schema.isUrl.value)){
+                if (!value.match(new RegExp(schema.isUrl.value[0], schema.isUrl.value[1]))){
+                    errorSetter(message)
+                    return
+                }
+            }
+        }
+    }
     errorSetter("")
     return
 }

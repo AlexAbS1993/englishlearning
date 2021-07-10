@@ -1,10 +1,11 @@
-import { FC, useState } from "react"
+import { FC, LegacyRef, useEffect, useRef, useState } from "react"
 import { InputSimpleType } from "./Types/inputTypes"
 import classes from './input.module.css'
 import { currentInputClassName } from "../../functions/Inputs/currentInputClassName"
 import { validator } from "../../functions/Validator/validator"
 
-export const Input:FC<InputSimpleType> = ({name, id, onChange, type, label, labelImg, schema}) => {
+export const Input:FC<InputSimpleType> = ({name, id, onChange, type, label, labelImg, schema, placeholder, forceValue, toggleForce}) => {
+    const inputRef:LegacyRef<HTMLInputElement> = useRef(null)
     // Стейт текста ошибки
     const [fieldErrorText, setTextError] = useState<string>("")
     // Состояние "грязного" инпута
@@ -17,10 +18,19 @@ export const Input:FC<InputSimpleType> = ({name, id, onChange, type, label, labe
     const checkHandleChange = () => {
         setCheck(!isChecked)
         onChange(!isChecked)}
+    // Установка принудительного значения
+    useEffect(() => {
+        if (toggleForce && forceValue){
+            inputRef.current!.value = forceValue
+        }
+    }, [toggleForce])
     // РЕНДЕР
     return (
         <div className={`${currentInputClassName(type, classes)}`}>
-            <div><label htmlFor={id} className={classes.inputLabel}>{label}</label></div>
+            <div>{
+                label &&
+                <label htmlFor={id} className={classes.inputLabel}>{label}</label>}
+                </div>
                 {
                     type === "checkbox"  && 
                     <div>
@@ -30,6 +40,7 @@ export const Input:FC<InputSimpleType> = ({name, id, onChange, type, label, labe
                         checked={isChecked}
                         onChange={checkHandleChange}
                         id={id}
+                        placeholder={placeholder ? placeholder : ""}
                         /> 
                     </div>
                 }
@@ -37,6 +48,7 @@ export const Input:FC<InputSimpleType> = ({name, id, onChange, type, label, labe
                     (type === "text" || type === "password") && 
                     <div className={classes.inputInputWrapper}>
                         <input 
+                        ref={inputRef}
                         autoComplete="off"
                         type={type} 
                         name={name} 

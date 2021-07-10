@@ -7,7 +7,11 @@ export const notifyInitialState = {
     isError: false,
     notifyType: "" as notyfiTypes,
     notifyText: "",
-    errorText: ""
+    errorText: "",
+    toggles: {
+        isWordAdded: false,
+        isWordDeleted: false
+    }
 }
 
 const prefix = "NOTIFY:"
@@ -30,6 +34,9 @@ export const notifyActionCreators = {
     },
     setClearReducer: () => {
         return {type: `${prefix}CLEAR_NOT_REDUCER`} as const
+    },
+    setToggle: (value: boolean, toggle: keyof typeof notifyInitialState.toggles) => {
+        return {type:`${prefix}SET_TOGGLE`, value, toggle} as const
     }
 }
 
@@ -70,6 +77,15 @@ export const notifyReducer = (state: notifyInitialStateType = notifyInitialState
                 errorText: action.text
             }
         }
+        case "NOTIFY:SET_TOGGLE": {
+            return {
+                ...state,
+                toggles: {
+                    ...state.toggles,
+                    [action.toggle]: action.value
+                }
+            }
+        }
         default: {
             return state
         }
@@ -91,4 +107,11 @@ export const ErrorThunk = (message: string) => (dispatch: AppDispatch) => {
     }, 3000)
     dispatch(notifyActionCreators.setError(true))
     dispatch(notifyActionCreators.setErrorTest(message))
+}
+
+export const TogglerThunk = (value: boolean, toggle: keyof typeof notifyInitialState.toggles ) => async(dispatch: AppDispatch) => {
+    setTimeout(() => {
+        dispatch(notifyActionCreators.setToggle(!value, toggle))
+    }, 3000)
+    dispatch(notifyActionCreators.setToggle(value, toggle))
 }
