@@ -1,10 +1,8 @@
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useInputCreate } from "../../../functions/Hooks/useInputCreate";
-import { inputInjectChange } from "../../../functions/Modal/registrationInputInjectChange";
+import { useInputCreate, useSearchList, useSubmition } from "../../../functions/Hooks/useInputCreate";
 import { modalActionCreators } from "../../../store/reducers/modalReducer/modal.reducer";
 import { notyfiTypes } from "../../../store/reducers/NotifyErrorReducer/Types/notify.reducer.types";
-import { getSearchWord } from "../../../store/reducers/wordReducer/wordReducer";
 import { RootState } from "../../../store/Types/store.types";
 import Button from "../../Buttons/Button";
 import { Extentions, VariantsEnum } from "../../Buttons/Types/Button.component.types";
@@ -16,77 +14,19 @@ import { ModalSeatchInputsType, stateListType } from "./Types/modalSearchAndAct.
 export const ModalSearchAndAct:FC = () => {
     const notType = useSelector<RootState, notyfiTypes>(state => state.notify.notifyType)
     const [initialize, setInitialize] = useState(false)
-    const [isInputsInjeced, setInputsInjeced] = useState(false)
-    const [isInputsBuild, setInputsBuild] = useState(false)
     const inputs = useSelector<RootState, ModalSeatchInputsType[]>(state => state.modal.search.inputs)
     const cb = useSelector<RootState, (args: any) => void>(state => state.modal.search.cb)
-    const [list, setList] = useState<stateListType[]>([])
     const stateList = useSelector<RootState, stateListType[]>(state => state.word.searchedWords)
     const [forceToggle, setForceToggle] = useState(false)
-    useEffect(() => {
-        if (stateList.length > 0){
-            setList([...stateList])
-        }
-    }, [stateList])
-    const [inputsValues, setInputsValues] = useState({
-            value: ""
-    })
-    const [submit, setSubmit] = useState(false)
+    const {listOfSearched} = useSearchList(stateList)
+    const {inputsValues, definiteInputs, inputsReady, setInputsValues} = useInputCreate(inputs, initialize)
+    const {submitHandler} = useSubmition(listOfSearched, inputsValues, cb)
     const dispatch = useDispatch()
     useEffect(() => {
-        if (inputsValues.value.length > 1){
-            dispatch(getSearchWord(inputsValues.value))
-        }
-    }, [inputsValues.value])
-    const submitHandler = useCallback(() => {
-        setSubmit(prev => !prev)
-    }, [])
-    useEffect(() => {
-        if (submit){
-                let newInputsValues
-                let id
-                for (let key in list){
-                    if (list[key].word.value === inputsValues.value){
-                        id = list[key].wordId
-                    }
-                }
-                newInputsValues = {
-                    value: {
-                        value: inputsValues.value,
-                        id: id
-                    }
-                }
-                cb(newInputsValues.value.id)
-                setSubmit(prev => !prev)
-            }
-    }, [submit, inputsValues, cb])
-    useEffect(() => {
-        if (!initialize){
-            if (inputs.length > 0){
-                let fields:any = {}
-                for (let i = 0; i < inputs.length; i++){
-                    if (inputs[i].type === "checkbox"){
-                        fields[inputs[i].name].value = false
-                    }
-                    else {
-                        fields[inputs[i].name] = {value: "", id: null}
-                    } 
-                }
-                setInputsValues({...fields})
-                setInputsBuild(true)
-            }   
-        }
-    }, [initialize])
-    const definiteInputs = useMemo(() => {
-        setInputsInjeced(true)
-        return inputInjectChange<ModalSeatchInputsType>(inputs, setInputsValues)
-    }, [])
-
-    useEffect(() => {
-        if (isInputsBuild === true && isInputsInjeced === true){
+        if (inputsReady){
             setInitialize(true)
         }
-    }, [isInputsBuild, isInputsInjeced])
+    }, [inputsReady])
     const selectHandler = (value: string, id: number) => {
         setInputsValues({...inputsValues, value: value})
         setForceToggle(true)
@@ -116,7 +56,7 @@ export const ModalSearchAndAct:FC = () => {
                 />
                     </form>
                 <List 
-                list={list}
+                list={listOfSearched}
                 cb={selectHandler}
                 type="searchList"
                 />

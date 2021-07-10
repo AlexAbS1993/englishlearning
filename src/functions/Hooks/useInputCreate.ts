@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState } from "react"
-import { ModalSeatchInputsType } from "../../components/Modals/ModalSearchAndAct/Types/modalSearchAndAct.types"
+import { useCallback, useEffect, useMemo, useState } from "react"
+import { ModalSeatchInputsType, stateListType } from "../../components/Modals/ModalSearchAndAct/Types/modalSearchAndAct.types"
 import { InitialStateLoginRegistrationInputs } from "../../store/reducers/modalReducer/Types/modal.reducer.types"
 import { inputInjectChange } from "../Modal/registrationInputInjectChange"
 
 export function useInputCreate<T extends ModalSeatchInputsType|InitialStateLoginRegistrationInputs>(inputs: T[], initialize: boolean){
-    const [inputsValues, setInputsValues] = useState({})
+    const [inputsValues, setInputsValues] = useState({value: ""})
     const [isInputsInjeced, setInputsInjeced] = useState(false)
     const [isInputsBuild, setInputsBuild] = useState(false)
     const [inputsReady, setReady] = useState(false)
@@ -35,6 +35,45 @@ export function useInputCreate<T extends ModalSeatchInputsType|InitialStateLogin
         }
     }, [initialize])
     return {
-        inputsValues, definiteInputs, inputsReady
+        inputsValues, definiteInputs, inputsReady, setInputsValues
     }
+}
+
+export const useSubmition = (listOfSearched:stateListType[], inputsValues:{
+    value: string;
+}, cb: (args:any) => void) => {
+    const [submit, setSubmit] = useState(false)
+    const submitHandler = useCallback(() => {
+        setSubmit(prev => !prev)
+    }, [])
+    useEffect(() => {
+        if (submit){
+                let newInputsValues
+                let id
+                for (let key in listOfSearched){
+                    if (listOfSearched[key].word.value === inputsValues.value){
+                        id = listOfSearched[key].wordId
+                    }
+                }
+                newInputsValues = {
+                    value: {
+                        value: inputsValues.value,
+                        id: id
+                    }
+                }
+                cb(newInputsValues.value.id)
+                setSubmit(prev => !prev)
+            }
+    }, [submit, inputsValues, cb])
+    return {submitHandler}
+}
+
+export const useSearchList = (stateList:stateListType[]) => {
+    const [listOfSearched, setList] = useState<stateListType[]>([])
+    useEffect(() => {
+        if (stateList.length > 0){
+            setList([...stateList])
+        }
+    }, [stateList])
+    return {listOfSearched}
 }
