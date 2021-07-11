@@ -148,6 +148,7 @@ const ModalForm:FC<ModalRegistrationLoginType> = ({page}) => {
                     <ModalFormInner 
                     inputs={definitiveInputs}
                     submitDisabler={setErrorsStateFunction}
+                    values={tempValues}
                     />
                 </form>
             <div className={classes.modalRegistrationLoginButtonsWrapper}>

@@ -16,9 +16,11 @@ export const Input:FC<InputSimpleType> = (
     placeholder, 
     forceValue, 
     toggleForce,
-    submitDisabler
+    submitDisabler,
+    value
 }
     ) => {
+        console.log(name, value)
     const inputRef:LegacyRef<HTMLInputElement> = useRef(null)
     // Состояние "грязного" инпута
     const [isFieldTouched, setFieldTouched] = useState(false)
@@ -40,13 +42,13 @@ export const Input:FC<InputSimpleType> = (
     // Стейт текста ошибки
     const [fieldErrorText, setTextError] = useState<string>("")
     useEffect(() => {
-            if ((fieldErrorText.length > 0 && submitDisabler)){
+            if ((fieldErrorText.length > 0 && submitDisabler)||(value?.length === 0 && submitDisabler)){
                 submitDisabler(name, true)
             }
-            if (fieldErrorText.length === 0 && submitDisabler && isFieldTouched && inputRef.current!.value.length > 0){
+            if (fieldErrorText.length === 0 && submitDisabler && isFieldTouched && value!.length > 0){
                 submitDisabler(name, false)
             }
-    },[fieldErrorText, inputRef.current?.value])
+    },[fieldErrorText, value])
     // РЕНДЕР
     return (
         <div className={`${currentInputClassName(type, classes)}`}>
@@ -71,6 +73,7 @@ export const Input:FC<InputSimpleType> = (
                     (type === "text" || type === "password") && 
                     <div className={classes.inputInputWrapper}>
                         <input 
+                        value={value}
                         ref={inputRef}
                         autoComplete="off"
                         type={type} 

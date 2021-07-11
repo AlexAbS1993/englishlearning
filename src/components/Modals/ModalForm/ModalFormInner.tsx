@@ -2,7 +2,7 @@ import { FC } from "react"
 import { ModalRegistrationInnerType } from "../Types/modal.component.types"
 import { ModalFormMapped } from "./ModalFormMapped"
 
-export const ModalFormInner:FC<ModalRegistrationInnerType> = ({inputs, submitDisabler}) => {
+export const ModalFormInner:FC<ModalRegistrationInnerType> = ({inputs, submitDisabler, values}) => {
     return (
         <>
             {
@@ -17,6 +17,7 @@ export const ModalFormInner:FC<ModalRegistrationInnerType> = ({inputs, submitDis
                     onChange={element.onChange}
                     schema={element.validator}
                     submitDisabler={submitDisabler}
+                    values={values[element.name]}
                     />
                 })
             }

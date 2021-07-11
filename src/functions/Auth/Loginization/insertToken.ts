@@ -9,5 +9,11 @@ export const insertToken = (isRemember: boolean, token: string) => {
 }
 
 export const extractToken = () => {
-    return localStorage.getItem("token")
+    if (localStorage.getItem("token")){
+        return localStorage.getItem("token")
+    }
+    if (sessionStorage.getItem("token")){
+        return sessionStorage.getItem("token")
+    }
+    return null
 }

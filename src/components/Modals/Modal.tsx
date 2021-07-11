@@ -12,9 +12,9 @@ const Modal:FC = () => {
     const page = useSelector<RootState, ModalInitialStatePageTypeType>(state => state.modal.page)
     const isOpen = useSelector<RootState, boolean>(state => state.modal.isOpen)
     const transition = useTransition(isOpen, {
-        from: {opacity: 0},
+        from: {opacity: 0, display: "grid"},
         enter: {opacity: 1},
-        leave: {opacity: 0, config:{duration: 10}}
+        leave: {opacity: 0, display: "none"}
     })
     return (
         <>

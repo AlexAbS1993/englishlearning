@@ -6,6 +6,7 @@ import { getCountOfWordsThunk } from "../../../store/reducers/wordReducer/wordRe
 
 export const WordsCount:FC = () => {
     const wordCount = useSelector<RootState, number|null>(state => state.word.countOfWords)
+    const isAuth = useSelector<RootState, boolean>(state => state.user.isAuth)
     const [isInitialize, setInitialized] = useState(false)
     const newWordAddedToggle = useSelector<RootState, boolean>(state => state.notify.toggles.isWordAdded)
     const wordDeletedToggle = useSelector<RootState, boolean>(state => state.notify.toggles.isWordDeleted)
@@ -14,10 +15,13 @@ export const WordsCount:FC = () => {
         if (!isInitialize){
             dispatch(getCountOfWordsThunk())
         }
+        if (isAuth){
+            dispatch(getCountOfWordsThunk())
+        }
         if (newWordAddedToggle||wordDeletedToggle){
             dispatch(getCountOfWordsThunk())
         }
-    }, [newWordAddedToggle, isInitialize, dispatch, wordDeletedToggle])
+    }, [newWordAddedToggle, isInitialize, dispatch, wordDeletedToggle, isAuth])
     useEffect(() => {
         if (wordCount){
             setInitialized(true)

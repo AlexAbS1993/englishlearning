@@ -7,6 +7,8 @@ export type ModalRegistrationLoginType = {
         page: "registration"|"login"|"newWord"
 }
 export type ModalRegistrationInnerType = {
-    inputs: (InitialStateLoginRegistrationInputs&{onChange: (e:any) => void}&{validator?:any})[],submitDisabler?:(name: string, value: boolean) => void
+    inputs: (InitialStateLoginRegistrationInputs&{onChange: (e:any) => void}
+    &{validator?:any})[],submitDisabler?:(name: string, value: boolean) => void,values: {[key:string]: string}
 }
-export type ModalRegistrationInnerMappedType = InitialStateLoginRegistrationInputs&{onChange: (e: any) => void}&{schema:any}&{submitDisabler?:(name: string, value: boolean) => void}
+export type ModalRegistrationInnerMappedType = InitialStateLoginRegistrationInputs&
+{onChange: (e: any) => void}&{schema:any}&{submitDisabler?:(name: string, value: boolean) => void}&{values: string}
