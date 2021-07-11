@@ -25,22 +25,40 @@ const ModalForm:FC<ModalRegistrationLoginType> = ({page}) => {
     // Данные из полей формы для отправки
     const [tempValues, setChange] = useState({})
     const [initialValues, setInitialValues] = useState({})
-     
+    // Состояние кнопки
+    const [disabledButton, setDisabled] = useState(true)
+    const [errorsState, setErrorsState] = useState<{[key:string]:boolean}>({})
+    const setErrorsStateFunction = useCallback((name: string, value: boolean) => {
+        setErrorsState(prev => {
+            return {...prev, [name]: value} })
+    }, [])
+    useEffect(() => {
+        let hasError = false
+        for (let keys in errorsState){
+            if (errorsState[keys] === true){
+                hasError = true
+            }
+        }
+        setDisabled(hasError)
+    },[errorsState])
     // Отметка об окончании формирования полей и эффект формирования полей
     const [isTempValuesDone, setTempValuesDone] = useState(false)
     useEffect(() => {
         if (inputs.length > 0){
             let fields:any = {}
+            let validatorState: any = {}
             for (let i = 0; i < inputs.length; i++){
                 if (inputs[i].type === "checkbox"){
                     fields[inputs[i].name] = false
                 }
                 else {
                     fields[inputs[i].name] = ""
+                    validatorState[inputs[i].name] = true
                 } 
             }
             setChange({...fields})
             setInitialValues({...fields})
+            setErrorsState({...validatorState})
             setTempValuesDone(true)
         }      
     }, [inputs])
@@ -129,6 +147,7 @@ const ModalForm:FC<ModalRegistrationLoginType> = ({page}) => {
                 <form ref={formRef}>
                     <ModalFormInner 
                     inputs={definitiveInputs}
+                    submitDisabler={setErrorsStateFunction}
                     />
                 </form>
             <div className={classes.modalRegistrationLoginButtonsWrapper}>
@@ -137,6 +156,7 @@ const ModalForm:FC<ModalRegistrationLoginType> = ({page}) => {
                 variant={VariantsEnum.modal_registration_accept}
                 extention={Extentions.modal_registration}
                 cb={submitHandler}
+                disabled={disabledButton}
                 />
                 <Button 
                 text="Закрыть"

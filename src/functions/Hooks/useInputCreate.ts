@@ -39,41 +39,24 @@ export function useInputCreate<T extends ModalSeatchInputsType|InitialStateLogin
     }
 }
 
-export const useSubmition = (listOfSearched:stateListType[], inputsValues:{
-    value: string;
-}, cb: (args:any) => void) => {
+export const useSubmition = (cb: (args?:any) => void) => {
     const [submit, setSubmit] = useState(false)
     const submitHandler = useCallback(() => {
         setSubmit(prev => !prev)
     }, [])
     useEffect(() => {
         if (submit){
-                let newInputsValues
-                let id
-                for (let key in listOfSearched){
-                    if (listOfSearched[key].word.value === inputsValues.value){
-                        id = listOfSearched[key].wordId
-                    }
-                }
-                newInputsValues = {
-                    value: {
-                        value: inputsValues.value,
-                        id: id
-                    }
-                }
-                cb(newInputsValues.value.id)
-                setSubmit(prev => !prev)
+               cb()
+               setSubmit(prev => !prev)
             }
-    }, [submit, inputsValues, cb])
+    }, [submit, cb])
     return {submitHandler}
 }
 
 export const useSearchList = (stateList:stateListType[]) => {
     const [listOfSearched, setList] = useState<stateListType[]>([])
     useEffect(() => {
-        if (stateList.length > 0){
             setList([...stateList])
-        }
     }, [stateList])
     return {listOfSearched}
 }

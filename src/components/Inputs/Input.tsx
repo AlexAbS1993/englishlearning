@@ -4,11 +4,24 @@ import classes from './input.module.css'
 import { currentInputClassName } from "../../functions/Inputs/currentInputClassName"
 import { validator } from "../../functions/Validator/validator"
 
-export const Input:FC<InputSimpleType> = ({name, id, onChange, type, label, labelImg, schema, placeholder, forceValue, toggleForce}) => {
+export const Input:FC<InputSimpleType> = (
+{
+    name, 
+    id, 
+    onChange, 
+    type, 
+    label, 
+    labelImg, 
+    schema, 
+    placeholder, 
+    forceValue, 
+    toggleForce,
+    submitDisabler
+}
+    ) => {
     const inputRef:LegacyRef<HTMLInputElement> = useRef(null)
-    // Стейт текста ошибки
-    const [fieldErrorText, setTextError] = useState<string>("")
     // Состояние "грязного" инпута
+    const [isFieldTouched, setFieldTouched] = useState(false)
     const [isFieldDirt, setDirtField] = useState(false)
     // Управление чекбоксом
     const [isChecked, setCheck] = useState(false) 
@@ -24,6 +37,16 @@ export const Input:FC<InputSimpleType> = ({name, id, onChange, type, label, labe
             inputRef.current!.value = forceValue
         }
     }, [toggleForce])
+    // Стейт текста ошибки
+    const [fieldErrorText, setTextError] = useState<string>("")
+    useEffect(() => {
+            if ((fieldErrorText.length > 0 && submitDisabler)){
+                submitDisabler(name, true)
+            }
+            if (fieldErrorText.length === 0 && submitDisabler && isFieldTouched && inputRef.current!.value.length > 0){
+                submitDisabler(name, false)
+            }
+    },[fieldErrorText, inputRef.current?.value])
     // РЕНДЕР
     return (
         <div className={`${currentInputClassName(type, classes)}`}>
@@ -55,13 +78,18 @@ export const Input:FC<InputSimpleType> = ({name, id, onChange, type, label, labe
                         id={id} 
                         onChange={(event) => {
                             onChange(event)
+                            if (!isFieldTouched){
+                                setFieldTouched(true)
+                            }
                             if (schema){
                                 validator(setTextError, schema, event.target.value)
                             }
                         }
                         } 
                         onBlur={() => {
-                            setDirtField(true)
+                            if (isFieldTouched){
+                                setDirtField(true)
+                            } 
                         }}
                         className={`${classes.inputInput} ${(fieldErrorText && isFieldDirt) && `${classes.inputInputError}`}`}
                         />

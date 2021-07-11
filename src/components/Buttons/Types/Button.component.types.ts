@@ -20,6 +20,7 @@ export type SimpleButtonType = {
     cb: (data: any) => void,
     extention: Extentions,
     text?:string,
+    disabled?:boolean
 }
 
 export type ImageStateIconButton = {

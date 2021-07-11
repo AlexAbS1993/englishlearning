@@ -9,5 +9,6 @@ export type InputSimpleType = {
     placeholder?:string,
     value?:string,
     toggleForce?:boolean,
-    forceValue?: string
+    forceValue?: string,
+    submitDisabler?: (name: string, value: boolean) => void
 }

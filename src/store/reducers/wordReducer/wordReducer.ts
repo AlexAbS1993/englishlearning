@@ -109,6 +109,7 @@ export const getSearchWord = (value: string) => async(dispatch:AppDispatch) => {
     try{
         const list = await wordsAPI.getWordByLetters(value)
         let body = list.data
+        console.log(body)
         dispatch(wordReducerActionCreators.setSearchedWords(body.words))
     }
     catch(e){

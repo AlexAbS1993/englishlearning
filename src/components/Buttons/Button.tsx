@@ -2,9 +2,11 @@ import React, { FC, useEffect, useState } from "react"
 import { IconButtonType, SimpleButtonType } from "./Types/Button.component.types"
 import classes from './Button.module.css'
 
-const Button:FC<SimpleButtonType> = React.memo(({extention, variant, cb, text}) => {
+const Button:FC<SimpleButtonType> = React.memo(({extention, variant, cb, text, disabled}) => {
     return (
-        <button data-testid="simplebutton" onClick={cb} className={`${classes[extention]} ${classes[variant]}`}>
+        <button data-testid="simplebutton" onClick={cb} className={`${classes[extention]} ${classes[variant]} ${disabled ? classes.dis : ""}`} 
+        disabled={disabled ? disabled : false}
+        >
             {
                 text && text 
             }

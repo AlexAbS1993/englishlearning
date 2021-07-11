@@ -10,6 +10,14 @@
     color: rgb(255, 255, 255);
 }
 
+.dis{
+    background-color:rgba(92, 92, 92, 0.705) !important;
+    color: rgba(46, 40, 40, 0.596);
+}
+.dis:hover {
+    transform: translateY(0px) !important;
+}
+
 .simple_small { /* Маленькая кнопка */
     padding: 2px 5px;
     width: 60px;
